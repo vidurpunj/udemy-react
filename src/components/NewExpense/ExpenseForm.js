@@ -13,6 +13,9 @@ const ExpenseForm = () => {
             amount: enteredAmount,
             date: enteredDate
         }
+        setEneterdTitle('');
+        setEnteredAmount('');
+        setEnteredDate('');
         console.log(formData);
     }
     const eventChangeHandler = (identifier, event) => {
@@ -33,17 +36,20 @@ const ExpenseForm = () => {
             <div className='new-expense__controls'>
                 <div className='new-expense__control'>
                     <label>Title</label>
-                    <input type="text" onChange={(event) => { eventChangeHandler('title', event) }}></input>
+                    <input type="text" value={eneterdTitle}
+                        onChange={(event) => { eventChangeHandler('title', event) }}></input>
                 </div>
                 <div className='new-expense__control'>
                     <label>Amount</label>
-                    <input type='number' min='0.01' step='0.01' onChange={(event) => { eventChangeHandler('amount', event) }} />
+                    <input type='number' value={enteredAmount}
+                        min='0.01' step='0.01' onChange={(event) => { eventChangeHandler('amount', event) }} />
                 </div>
             </div>
             <div className='new-expense__controls'>
                 <div className='new-expense__control'>
                     <label>Date</label>
-                    <input type="date" min='2019-01-01' max='2023-01-01' onChange={(event) => { eventChangeHandler('date', event) }} />
+                    <input type="date" value={enteredDate}
+                        min='2019-01-01' max='2023-01-01' onChange={(event) => { eventChangeHandler('date', event) }} />
                 </div>
             </div>
             <div className="new-expense__actions">

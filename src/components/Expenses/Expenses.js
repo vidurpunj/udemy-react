@@ -3,6 +3,7 @@ import ExpenseItem from './ExpenseItem';
 import './Expenses.css';
 import Card from '../UI/Card';
 import ExpenseFilter from './ExpenseFilter';
+import ExpensesList from './ExpensesList';
 
 const Expenses = (props) => {
     const [filteredYear, setFilterdYear] = useState('2020');
@@ -24,22 +25,15 @@ const Expenses = (props) => {
     const filterdExpesnses = props.items.filter((expense) => {
         return expense.date.getFullYear() === parseInt(filteredYear);
     })
-    let expenseContent = <p>No expenses found.</p>
-    if (filterdExpesnses.length > 0) {
-        expenseContent = filterdExpesnses.map((expense) => (
-            <ExpenseItem
-                key={expense.id}
-                title={expense.title}
-                amount={expense.amount}
-                date={expense.date} />
-        ))
-    }
+
     return (
-        <Card className='expenses'>
-            <h1>Data of years {filterInfoText} is not included.</h1>
-            <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangedHandler} />
-            {expenseContent}
-        </Card>
+        <li>
+            <Card className='expenses'>
+                <h1>Data of years {filterInfoText} is not included.</h1>
+                <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangedHandler} />
+                <ExpensesList items={filterdExpesnses} />
+            </Card>
+        </li>
     )
 }
 

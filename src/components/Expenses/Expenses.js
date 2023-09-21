@@ -8,7 +8,6 @@ const Expenses = (props) => {
     const [filteredYear, setFilterdYear] = useState('2020');
 
     let filterInfoText = '2019, 2021 & 2022';
-
     if (filteredYear == 2019) {
         filterInfoText = '2020, 2021 & 2022';
     } else if (filteredYear === '2020') {
@@ -22,18 +21,24 @@ const Expenses = (props) => {
         setFilterdYear(selectedYear);
         console.log(selectedYear);
     }
-    console.log(props.items);
+    const filterdExpesnses = props.items.filter((expense) => {
+        return expense.date.getFullYear() === parseInt(filteredYear);
+    })
+    let expenseContent = <p>No expenses found.</p>
+    if (filterdExpesnses.length > 0) {
+        expenseContent = filterdExpesnses.map((expense) => (
+            <ExpenseItem
+                key={expense.id}
+                title={expense.title}
+                amount={expense.amount}
+                date={expense.date} />
+        ))
+    }
     return (
         <Card className='expenses'>
             <h1>Data of years {filterInfoText} is not included.</h1>
             <ExpenseFilter selected={filteredYear} onChangeFilter={filterChangedHandler} />
-            {props.items.map((expense) => (
-                <ExpenseItem
-                    key={expense.id}
-                    title={expense.title}
-                    amount={expense.amount}
-                    date={expense.date} />
-            ))}
+            {expenseContent}
         </Card>
     )
 }

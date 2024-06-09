@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Expenses from './components/Expenses/Expenses';
 import NewExpense from './components/NewExpense/NewExpense';
+import InvestmentForm from './components/InvestmentCalculator/InvestmentForm';
 
 const dummy_expenses = [
   {
@@ -44,8 +45,9 @@ const App = () => {
 
   return (
     <div className="App">
-      <NewExpense onAddExpense={addExpensehandler}/>
-      <Expenses items={expenses} />
+      {/* <NewExpense onAddExpense={addExpensehandler}/> */}
+      {/* <Expenses items={expenses} /> */}
+      <InvestmentForm></InvestmentForm>
     </div>
   );
 }
